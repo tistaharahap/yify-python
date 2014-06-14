@@ -1,7 +1,7 @@
 import requests, copy, json
 
 class yify:
-    base_url = 'https://yify-torrents.com/api/'
+    base_url = 'https://yts.re/api/'
     uri = ''
 
     opt_qualities = ['720p', '1080p', '3D', 'ALL']
