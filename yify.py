@@ -49,7 +49,7 @@ class yify:
 
         if id is None:
             errors['state'] = True
-            errors['message'].append('Movie ID must be blank')
+            errors['message'].append('Movie ID must not be blank')
 
         if errors['state']:
             data['errors'] = errors
