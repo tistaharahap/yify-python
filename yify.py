@@ -155,6 +155,32 @@ class yify:
 
         return data
 
+    def list_by_imdb_id(self, id, format='json'):
+        self.uri = "listimdb"
+        data = copy.deepcopy(self.data)
+        errors = copy.deepcopy(self.errors)
+
+        if format in self.data_formats:
+            self.uri = '%s.%s' % (self.uri, format)
+        else:
+            errors['state'] = True
+            errors['message'].append('Data return format must be json, xml or csv')
+
+        if id is None:
+            errors['state'] = True
+            errors['message'].append('Movie ID must be blank')
+
+        if errors['state']:
+            data['errors'] = errors
+        else:
+            url = "%s?imdb_id=%s" % (self._construct_url(), id)
+            m = self._fetch_data(url)
+            if m is not None:
+                data['movies'] = m
+
+
+        return data
+
     def _fetch_data(self, url):
         r = requests.get(url)
         if r.status_code == 200:
