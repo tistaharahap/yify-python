@@ -20,6 +20,19 @@ class yify:
         'order':            'desc'      # {desc, asc}
     }
 
+    data = {
+        'movies':   [],
+        'errors':   {
+            'state':    False,
+            'message':  []
+        }
+    }
+
+    errors = {
+            'state': False,
+            'message': []
+        }
+
     data_formats = ['json', 'xml', 'csv']
 
     def newest(self, quality= 'ALL', format='json'):
@@ -28,18 +41,8 @@ class yify:
     def movie_detail(self, id=None, format='json'):
         self.uri = 'movie'
 
-        data = {
-            'movie':    [],
-            'errors':   {
-                'state':    False,
-                'message':  []
-            }
-        }
-
-        errors = {
-            'state': False,
-            'message': []
-        }
+        data = copy.deepcopy(self.data)
+        errors = copy.deepcopy(self.errors)
 
         if format in self.data_formats:
             self.uri = '%s.%s' % (self.uri, format)
@@ -64,18 +67,8 @@ class yify:
     def upcoming(self, format='json'):
         self.uri = 'upcoming'
 
-        data = {
-            'movies':   [],
-            'errors':   {
-                'state':    False,
-                'message':  []
-            }
-        }
-
-        errors = {
-            'state': False,
-            'message': []
-        }
+        data = copy.deepcopy(self.data)
+        errors = copy.deepcopy(self.errors)
 
         if format in self.data_formats:
             self.uri = '%s.%s' % (self.uri, format)
@@ -101,19 +94,10 @@ class yify:
                    format='json'):
         self.uri = 'list'
 
-        data = {
-            'movies':   [],
-            'errors':   {
-                'state':    False,
-                'message':  []
-            }
-        }
+        data = copy.deepcopy(self.data)
 
         params = copy.deepcopy(self.movie_list_params)
-        errors = {
-            'state': False,
-            'message': []
-        }
+        errors = copy.deepcopy(self.errors)
 
         if quality in self.opt_qualities:
             params['quality'] = quality
