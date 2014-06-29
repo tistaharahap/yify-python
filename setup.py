@@ -9,5 +9,5 @@ setup(
     url='https://github.com/tistaharahap/yify-python',
     license='LICENSE',
     description='Yify provides a Python interface to interact with Yify Torrent\'s API.',
-    long_description=open('README').read()
+    long_description=open('README.md').read()
 )
